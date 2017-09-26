@@ -1,0 +1,47 @@
+%br
+= @game.name
+%br
+- @game.users.each do |user|
+  = user.email
+  %br
+- @game.comments.each do |comment|
+  
+  = comment.user.name
+  = comment.created_at
+  %br    
+  = comment.body
+  %br
+  =comment.id
+  %br 
+  -if comment.parent_id
+    =comment.parent_id
+    %br
+  =link_to "destroy comment", game_comment_path(@game.id, comment.id), method: :delete
+  %br
+  %br
+  = form_for [@game, comment], method: :post do |f|
+    = f.label :body
+    = f.text_field :body
+    = hidden_field_tag 'parent_id', comment.id
+    = f.submit "create new comment"
+    %br
+%br
+/ = form_for [@game,@comment], method: :post do |f|
+/   = f.label :body, "Comment all game"
+/   = f.text_field :body
+/   = f.submit "create new comment"
+/   %br
+
+-if !@game.vacancies.find_by(user_id: current_user.id)
+  =form_for @game, url: add_vacancies_game_path(params[:id]), method: :post do |f|
+    = hidden_field_tag 'game_id', @game.id
+    = f.submit "Follow"
+
+
+-else	
+  =form_for @game, url: destroy_vacancies_game_path(params[:id]), method: :delete do |f|
+    = hidden_field_tag 'game_id', @game.id
+    = f.submit "Unfollow"
+
+
+= tree_of_comments @comments

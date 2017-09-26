@@ -1,0 +1,36 @@
+%html
+  %head
+    %title Play to voleyball!!!
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tag
+
+  %body
+    - flash.each do |key, value|
+      %div{:class => "alert-#{key}"}=value
+    = render partial: 'layouts/header'
+    = yield
+    %br
+    %br
+    = button_tag "Debug", { onclick: "toggle_debug()"}
+    .debug_information
+      %br
+      = debug(params) if Rails.env.development?
+      %br
+      = params.inspect
+      %br
+      = params[:remember_password].inspect
+      %br
+      = Rails.logger
+      %br
+      = request.method
+      %br
+      = response
+      %br
+      = session
+      %br
+      = controller.action_name
+      %br
+      = debug(assigns)
+      %br

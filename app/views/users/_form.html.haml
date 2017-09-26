@@ -1,0 +1,20 @@
+%h1 Form for create amd edit users
+= form_for @user do |f|
+    
+    =f.label :name
+    =f.text_field :name
+    %br
+    =f.label :email
+    =f.text_field :email
+    %br
+    =f.label :password
+    =f.password_field :password
+    %br
+    =f.label :password_confirmation
+    =f.password_field :password_confirmation
+    %br
+    =f.label :image
+    =f.file_field :image
+    %br
+    %br
+    =f.submit 'Create account'

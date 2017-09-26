@@ -1,0 +1,24 @@
+%h1 Form for create amd edit games
+= form_for @game do |f|
+    
+    = hidden_field_tag :user_id, current_user.id
+
+    =f.label :name
+    =f.text_field :name, require: true
+    %br
+    =f.label :level
+    =f.number_field :level, min: 0, max: 5
+    %br
+    =f.label :city
+    =f.text_field :city, require: true
+    %br
+    =f.label :street
+    =f.text_field :street, require: true
+    %br
+    =f.label :max_vacancies_for_players, "max count players"
+    =f.number_field :max_vacancies_for_players, require: true, min: 4, step: 2 
+    %br 
+    =f.label :time_event
+    =f.datetime_field :time_event, min: Time.zone.now+1.day
+    %br
+    =f.submit 'Create new game'

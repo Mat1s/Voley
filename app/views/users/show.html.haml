@@ -1,0 +1,20 @@
+%h1 Show current user
+%p= "Name:" + @user.name
+
+%p= "Email:" + @user.email
+
+%p= link_to "Edit", edit_user_path
+
+-if @user.image
+	= image_tag("#{@user.image}", size: "60x60")
+-else
+	= image_tag("/uploads/default.jpg", size: "60x60")
+%br
+= link_to "New game", new_game_path
+%br
+- @user.games.each do |game|
+	= link_to "#{game.id}-#{game.name}", game_path(game.id)
+	%br
+	= game.time_event
+	%br
+= link_to "All games", games_path

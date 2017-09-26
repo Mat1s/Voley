@@ -1,0 +1,17 @@
+.header 
+  %h2 Play with us!
+  
+  -if logged_in?
+    = link_to image_tag("icons/out", size: '45x45', alt: "logout"), logout_path, method: :delete, confirm: 'are you sure?'
+    %br
+    = link_to "#{current_user.name}", user_path(current_user.id)
+    %p= "email: " + current_user.email
+  -else  
+    = link_to image_tag("icons/reg", size: '45x45', alt: "registration"), new_user_path
+    = link_to image_tag("icons/in", size: '45x45', alt: "login"), login_path
+    = link_to image_tag("icons/f", size: '45x45', alt: "lFacebook"), '/auth/facebook'
+    = link_to image_tag("icons/vk", size: '45x45', alt: "lVkontakte"), '/auth/vkontakte'
+    = link_to image_tag("icons/t", size: '45x45', alt: "lTwitter"), '/auth/twitter'
+    = link_to image_tag("icons/ama", size: '45x45', alt: "lAmazon"), '/auth/amazon'
+   
+ 

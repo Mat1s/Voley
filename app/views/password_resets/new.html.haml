@@ -1,0 +1,9 @@
+%h1 I lost my password in my brain & want to repair it
+
+= form_tag :password_resets, url: password_resets_path do 
+  .field
+    = label_tag :email
+    = text_field_tag :email, params[:email], 
+      placeholder: 'Enter your email', require: true
+  .button
+    = submit_tag 'Reset password'

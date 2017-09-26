@@ -1,0 +1,21 @@
+%h1 Sign in
+
+-if flash.alert
+  .alert= flash.alert
+
+= form_tag login_path do
+  .field
+    = label_tag :email
+    = text_field_tag :email, params[:email],
+       placeholder: 'Enter your email', require: true
+  .field
+    = label_tag :password
+    = password_field_tag :password, params[:password],
+       placeholder: 'Enter your password', require: true
+  .field
+    = label_tag :remember_password
+    = check_box_tag :remember_password
+  .button 
+    = submit_tag 'Sign in'
+= link_to "Password reset", new_password_reset_path
+

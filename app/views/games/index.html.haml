@@ -1,0 +1,17 @@
+%h1 Games#index
+- if @games.count >= 1
+	%h2 This is actual games
+	- @games.each do |game|
+		= link_to " #{game.name} ", game_path(game.id)
+		%br
+		= game.time_event
+		%br
+		
+			
+- if @last_games.count >= 1
+	%h2 This games is end
+	-@last_games.each do |lgame|
+		= link_to " #{lgame.name} ", game_path(lgame.id)
+		%br
+		= lgame.time_event
+		%br

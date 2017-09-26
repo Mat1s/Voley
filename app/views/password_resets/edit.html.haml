@@ -1,0 +1,13 @@
+%h1 Change password
+
+= form_for @user,url: password_reset_path(params[:id]) do |f|
+  
+  = hidden_field_tag 'email', params[:email]
+ 
+  = f.label :password
+  = f.password_field :password, require: true
+  %br
+  = f.label :password_confirmation
+  = f.password_field :password_confirmation, require: true
+  %br
+  = f.submit "Change password"
