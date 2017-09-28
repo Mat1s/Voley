@@ -1,6 +1,10 @@
 class GamesController < ApplicationController
   before_action :user_logged_in?
   before_action :games_exist, only: [:show, :update, :add_vacancies, :destroy_vacancies]
+  
+  def edit
+  end
+  
   def new
     @game = current_user.games.new
     @game.vacancies.new(user_id: current_user.id)
@@ -21,10 +25,28 @@ class GamesController < ApplicationController
   
   def show
     @game = Game.find(params[:id])
-    @comments = Comment.where('pcomment_type = ?', "Game")
+    @comments = Comment.where('pcomment_type = ? & pcomment_id = ?' , "Game", @game.id)
     @user = current_user
+    @comment = Comment.new
   end
 
+  def update
+    @game = Game.find(params[:id])
+
+  end
+
+  def destroy
+    @game = Game.find(params[:id])
+    @game.vacancies.delete
+    @game.delete
+    redirect_to user_path(current_user.id)
+  end
+
+  def index
+    @games = Game.where('time_event >= ?', Time.zone.now.at_end_of_minute)
+    @last_games = Game.where('time_event < ?', Time.zone.now.at_end_of_minute)
+  end
+  
   def add_vacancies
     @game = Game.find(params[:id])
     if @game 
@@ -42,27 +64,7 @@ class GamesController < ApplicationController
       redirect_to @game
     end
   end
-  
-  def edit
-  end
-  
-  def update
-    @game = Game.find(params[:id])
 
-  end
-
-  def destroy
-      
-    @game = Game.find(params[:id])
-    @game.vacancies.delete
-    @game.delete
-    redirect_to user_path(current_user.id)
-  end
-
-  def index
-    @last_games = Game.where('time_event >= ?', Time.zone.now.at_end_of_minute)
-    @games = Game.where('time_event < ?', Time.zone.now.at_end_of_minute)
-  end
 
   private
 

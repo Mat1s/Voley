@@ -125,5 +125,23 @@ button:hover {
   color: white;
 }
 
+.different_color {
+  background-color: #c1ffc1;
+}
 
+.gameHead {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-shadow: 2px 2px #b4eeb4;
+}
 
+.listOfPlayers {
+  position: relative;
+  left: 75%;
+}
+
+ul {
+  list-style-type: none;
+}

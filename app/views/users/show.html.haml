@@ -3,7 +3,7 @@
 
 %p= "Email:" + @user.email
 
-%p= link_to "Edit", edit_user_path
+/%p= link_to "Edit", edit_user_path
 
 -if @user.image
 	= image_tag("#{@user.image}", size: "60x60")

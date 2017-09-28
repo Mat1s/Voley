@@ -4,9 +4,12 @@ class User < ActiveRecord::Base
     has_many :comments, through: :blogs, as: :pcomment
     has_many :comments, through: :games, as: :pcomment
     has_many :blogs
+    
     attr_accessor :activation_token, :remember_token, :reset_token
+    
     has_secure_password
     before_create :create_activation_digest
+    
     validates :name, presence: true, length: {in: 3..30}, uniqueness: true
     validates :email, presence: true, uniqueness: true
     validates :password, presence: true, length: { minimum: 7,
@@ -102,6 +105,8 @@ class User < ActiveRecord::Base
       image = "/uploads/#{self.id}/#{uploaded_io.original_filename}"
       update_columns(image: image)
     end
+    
+    
     protected
     
     def create_activation_digest

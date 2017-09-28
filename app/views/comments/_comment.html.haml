@@ -1,5 +1,7 @@
 = comment.user.name
 = comment.created_at
+// - if comment.user == current_user 
+//   =link_to "destroy comment", game_comment_path(@game.id, comment.id), method: :delete
 %br    
 = comment.body
 %br
@@ -8,4 +10,3 @@
 -if comment.parent_id
   =comment.parent_id
 %br
-/=link_to "destroy comment", game_comment_path(@game.id, comment.id), method: :delete

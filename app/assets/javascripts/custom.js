@@ -1,7 +1,7 @@
-//document.write("Are you");
+
 function toggle_debug() {
-	//document.write("Hello my hero");
 	var d = document.getElementsByClassName("debug_information");
+	//or d[i].style.display == "none"? d[i].style.display = "block" : d[i].style.display == "none"; 
 	for (var i = 0; i < d.length; i++) {
 	  if (d[i].style.display == "none")
 	  	d[i].style.display = "block"

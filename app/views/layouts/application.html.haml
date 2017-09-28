@@ -13,24 +13,15 @@
     = yield
     %br
     %br
-    = button_tag "Debug", { onclick: "toggle_debug()"}
-    .debug_information
+    = button_tag "Debug", { onclick: "toggle_debug();"}
+    .debug_information{ style: "display: none;"}
       %br
       = debug(params) if Rails.env.development?
       %br
-      = params.inspect
-      %br
-      = params[:remember_password].inspect
-      %br
-      = Rails.logger
+      .different_color= params.inspect
       %br
       = request.method
       %br
-      = response
-      %br
-      = session
-      %br
-      = controller.action_name
-      %br
+      .different_color= controller.action_name
       = debug(assigns)
-      %br
+ 
